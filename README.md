@@ -388,6 +388,7 @@ Business Insights
 
 ## 📁 Repository Structure
 
+<pre>
 Customer-Churn-Analysis/
 ├── Codes/
 │   ├── DAX_Measures_Combined.txt
@@ -412,6 +413,8 @@ Customer-Churn-Analysis/
 │
 ├── Churn Analysis.pbix
 └── README.md
+</pre>
+
 ---
 
 ## ▶️ How to Run
