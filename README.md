@@ -318,52 +318,52 @@ This approach helps move the analysis from "Who churned?" toward "Who may churn,
 
 ---
 
-## 📸 Dashboard Preview
+## 📊 Dashboard Preview
 
 ### 1. Churn Analysis – Summary
 
-![Churn Analysis Summary](Screenshots/Churn%20Analysis%20Summary.png)
+![Churn Analysis Summary](Screenshots/Churn%20Summary.png)
 
-### 2. Churn Analysis – Churn Reason
+### 2. Churn Analysis – Churn Prediction
 
-![Churn Reason](Screenshots/Churn%20Reason.png)
+![Churn Analysis Churn Prediction](Screenshots/Churn%20Prediction.png)
 
-### 3. Churn Analysis – Churn Prediction
+### 3. Churn Analysis – Retention & Risk
 
-![Churn Prediction](Screenshots/Churn%20Prediction.png)
+![Churn Analysis Retention & Risk](Screenshots/Retention%20%26%20Risk.png)
 
-### 4. Churn Analysis – Retention & Risk
+### 4. Churn Analysis – Churn Reason
 
-![Retention & Risk](Screenshots/Retention%20%26%20Risk.png)
+![Churn Analysis Churn Reason](Screenshots/Churn%20Reason.png)
 
 ---
 
 ## 🔄 Project Workflow
 
-Raw Customer Data
-        ↓
-SQL Server / SSMS
-        ↓
-Data Cleaning & Validation
-        ↓
-SQL Analysis & Reporting Views
-        ↓
-Power Query Transformations
-        ↓
-Prepared Analytical Dataset
-        ↓
-Python Preprocessing
-        ↓
-Random Forest Model
-        ↓
-Churn Prediction
-        ↓
-Predicted Churn Customers
-        ↓
-Power BI
-        ↓
-Summary + Churn Reason + Prediction + Retention & Risk
-        ↓
+Raw Customer Data  
+↓  
+SQL Server / SSMS  
+↓  
+Data Cleaning & Validation  
+↓  
+SQL Analysis & Reporting Views  
+↓  
+Power Query Transformations  
+↓  
+Prepared Analytical Dataset  
+↓  
+Python Preprocessing  
+↓  
+Random Forest Model  
+↓  
+Churn Prediction  
+↓  
+Predicted Churn Customers  
+↓  
+Power BI  
+↓  
+Summary + Churn Prediction + Retention & Risk + Churn Reason  
+↓  
 Business Insights
 
 ---
@@ -389,31 +389,29 @@ Business Insights
 ## 📁 Repository Structure
 
 Customer-Churn-Analysis/
-│
 ├── Codes/
+│   ├── DAX_Measures_Combined.txt
+│   ├── Power_Query_Transformations.txt
 │   ├── SQL_Queries.sql
 │   ├── churn_prediction_model.py
 │   ├── predict_churn.py
-│   ├── Power_Query_Transformations.txt
-│   └── DAX_Measures.txt
+│   └── README.md
 │
 ├── Data/
 │   ├── Customer_Data.xlsx
-│   ├── Prediction_Data.xlsx
-│   └── Predicted_Churn_Customers.xlsx
+│   └── Prediction Data.xlsx
 │
 ├── Output/
 │   └── Predicted_Churn_Customers.csv
 │
 ├── Screenshots/
-│   ├── Churn Analysis Summary.png
-│   ├── Churn Reason.png
+│   ├── Churn Summary.png
 │   ├── Churn Prediction.png
-│   └── Retention & Risk.png
+│   ├── Retention & Risk.png
+│   └── Churn Reason.png
 │
 ├── Churn Analysis.pbix
 └── README.md
-
 ---
 
 ## ▶️ How to Run
