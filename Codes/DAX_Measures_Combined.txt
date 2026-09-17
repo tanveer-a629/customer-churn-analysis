@@ -1,0 +1,100 @@
+/*
+============================================================
+CUSTOMER CHURN ANALYSIS - POWER BI DAX MEASURES
+============================================================
+
+Combined from the original DAX measures and the additional
+Summary Page / Churn Prediction Page measures.
+
+Main tables used in the Power BI model:
+- prod_Churn
+- Customer_Data
+- Predicted_Churn_Customers
+- Tbl_Measures
+
+Note:
+The original Power BI screenshots show the prediction table as
+Predicted_Churn_Customers. The notes supplied separately mention
+"Predictions"; the formulas below use the table name visible in
+the Power BI model.
+*/
+
+
+/* ============================================================
+   SUMMARY PAGE MEASURES
+   ============================================================ */
+
+Total Customers =
+COUNT(prod_Churn[Customer_ID])
+
+
+New Joiners =
+CALCULATE(
+    COUNT(prod_Churn[Customer_ID]),
+    prod_Churn[Customer_Status] = "Joined"
+)
+
+
+Total Churn =
+SUM(prod_Churn[Churn Status])
+
+
+Churn Rate =
+[Total Churn] / [Total Customers]
+
+
+/* ============================================================
+   CHURN PREDICTION / RISK MEASURES
+   ============================================================ */
+
+High-Risk Customers =
+COUNTROWS(Predicted_Churn_Customers)
+
+
+Count Predicted Churner =
+COUNT(Predicted_Churn_Customers[Customer_ID]) + 0
+
+
+High-Risk % =
+DIVIDE(
+    [High-Risk Customers],
+    COUNTROWS(Customer_Data),
+    0
+)
+
+
+Avg Tenure - Risk Customers =
+AVERAGE(Predicted_Churn_Customers[Tenure_in_Months])
+
+
+Revenue at Risk =
+SUM(Predicted_Churn_Customers[Monthly_Charge])
+
+
+Target Retention Saved Revenue =
+[Revenue at Risk] * 0.20
+
+
+/* ============================================================
+   REVENUE / CHURN IMPACT MEASURES
+   ============================================================ */
+
+Total Revenue Lost =
+CALCULATE(
+    SUM(Customer_Data[Total_Revenue]),
+    Customer_Data[Churn_Status] = 1
+)
+
+
+/* ============================================================
+   DYNAMIC TITLE
+   ============================================================ */
+
+Title Predicted Churners =
+"COUNT OF PREDICTED CHURNERS : "
+    & COUNT(Predicted_Churn_Customers[Customer_ID])
+
+
+/* ============================================================
+   END OF DAX MEASURES
+   ============================================================ */

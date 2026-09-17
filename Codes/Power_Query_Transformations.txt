@@ -1,0 +1,135 @@
+/*
+============================================================
+CUSTOMER CHURN ANALYSIS - POWER QUERY TRANSFORMATIONS
+============================================================
+
+Project: Customer Churn Analysis & Prediction
+
+This file documents the Power Query transformations used
+to prepare the Power BI data model.
+*/
+
+
+/* ============================================================
+   1. PROD_CHURN - CUSTOM COLUMNS
+   ============================================================ */
+
+Table: prod_Churn
+
+Custom Column: Churn Status
+
+if [Customer_Status] = "Churned" then 1 else 0
+
+Data Type:
+Change Churn Status to Number / Whole Number.
+
+
+Custom Column: Monthly Charge Range
+
+if [Monthly_Charge] < 20 then "< 20"
+else if [Monthly_Charge] < 50 then "20-50"
+else if [Monthly_Charge] < 100 then "50-100"
+else "> 100"
+
+
+/* ============================================================
+   2. MAPPING_AGEGRP - REFERENCE TABLE
+   ============================================================ */
+
+Create a new Reference table from prod_Churn.
+
+Steps:
+1. Keep only the Age column.
+2. Remove duplicate Age values.
+3. Add the Age Group custom column.
+
+Age Group:
+
+if [Age] < 20 then "< 20"
+else if [Age] < 36 then "20 - 35"
+else if [Age] < 51 then "36 - 50"
+else "> 50"
+
+
+Add AgeGrpSorting:
+
+if [Age Group] = "< 20" then 1
+else if [Age Group] = "20 - 35" then 2
+else if [Age Group] = "36 - 50" then 3
+else 4
+
+Change AgeGrpSorting data type to Whole Number.
+
+
+/* ============================================================
+   3. MAPPING_TENUREGRP - REFERENCE TABLE
+   ============================================================ */
+
+Create a new Reference table from prod_Churn.
+
+Steps:
+1. Keep only Tenure_in_Months.
+2. Remove duplicate Tenure_in_Months values.
+3. Add the Tenure Group custom column.
+
+Tenure Group:
+
+if [Tenure_in_Months] < 6 then "< 6 Months"
+else if [Tenure_in_Months] < 12 then "6-12 Months"
+else if [Tenure_in_Months] < 18 then "12-18 Months"
+else if [Tenure_in_Months] < 24 then "18-24 Months"
+else ">= 24 Months"
+
+
+Add TenureGrpSorting:
+
+if [Tenure Group] = "< 6 Months" then 1
+else if [Tenure Group] = "6-12 Months" then 2
+else if [Tenure Group] = "12-18 Months" then 3
+else if [Tenure Group] = "18-24 Months" then 4
+else 5
+
+Change TenureGrpSorting data type to Whole Number.
+
+
+/* ============================================================
+   4. PROD_SERVICES - SERVICE ANALYSIS TABLE
+   ============================================================ */
+
+Create a new Reference table from prod_Churn.
+
+Steps:
+1. Select the service-related columns.
+2. Unpivot the selected service columns.
+3. Rename the generated columns:
+
+Attribute -> Services
+Value     -> Status
+
+
+/* ============================================================
+   POWER QUERY WORKFLOW SUMMARY
+   ============================================================ */
+
+Source Data
+    ↓
+prod_Churn
+    ├── Churn Status
+    ├── Monthly Charge Range
+    │
+    ├── mapping_AgeGrp
+    │     ├── Age Group
+    │     └── AgeGrpSorting
+    │
+    ├── mapping_TenureGrp
+    │     ├── Tenure Group
+    │     └── TenureGrpSorting
+    │
+    └── prod_Services
+          ├── Services
+          └── Status
+
+
+============================================================
+END OF POWER QUERY TRANSFORMATIONS
+============================================================
